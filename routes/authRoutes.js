@@ -1,4 +1,4 @@
-const { login, register } = require('../controllers/authController');
+const { login, register, forgotPassword } = require('../controllers/authController');
 
 const authRoutes = require('express').Router();
 
@@ -7,5 +7,6 @@ authRoutes
     .get((req, res) => res.send("register"))
     .post(register)
 authRoutes.route("/login").post(login)
+authRoutes.route("/forgot-password").post(forgotPassword)
 
 module.exports = authRoutes;
