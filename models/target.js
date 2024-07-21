@@ -16,6 +16,19 @@ const targetSchema = new mongoose.Schema(
             required: true,
             trim: true,
         },
+        remaing_day: {
+            type: Number,
+            required: true,
+            trim: true,
+        },
+        start_date: {
+            type: Date,
+            required: true,
+        },
+        end_date: {
+            type: Date,
+            required: true,
+        },
         is_deleted: {
             type: Boolean,
             default: false,

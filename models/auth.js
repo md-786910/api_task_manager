@@ -5,11 +5,12 @@ const authSchema = new mongoose.Schema(
         email: { type: String, required: true },
         set_time_to_notify: { type: String, required: true, default: "12 PM" },
         schedule_time: { type: String, required: true, default: "12 PM" },
+
         is_active: {
             type: Boolean,
             default: false,
         },
-        is_deleted: {
+        is_suspend_account: {
             type: Boolean,
             default: false,
         }

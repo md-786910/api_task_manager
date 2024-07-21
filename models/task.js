@@ -11,6 +11,21 @@ const taskSchema = new mongoose.Schema(
             required: true,
             trim: true,
         },
+        summary: {
+            type: String,
+            required: true,
+            trim: true,
+            minlength: [10, 'summary must be at least 10 characters long'],
+            maxlength: [100, 'summary cannot be more than 100 characters long']
+        },
+        update_task_to_empty: {
+            type: Date,
+            required: false,
+        },
+        is_active: {
+            type: Boolean,
+            default: true,
+        },
         is_deleted: {
             type: Boolean,
             default: false,

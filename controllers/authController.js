@@ -1,4 +1,3 @@
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const auth = require('../models/auth');
 const { generateFromEmail } = require("unique-username-generator");
