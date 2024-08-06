@@ -42,22 +42,24 @@ exports.register = async (req, res) => {
     if (!req.body) {
         return res.status(400).json({ message: 'Invalid request' });
     }
-    let { username, email } = req.body;
-    if (!username || !email) {
+    let { display_name, email, photo_url, phone_number } = req.body;
+    if (!display_name || !email) {
         return res.status(400).json({ message: 'Invalid request' });
     }
     try {
-        if (!username) {
-            username = generateFromEmail(email, 3);
-        }
         // Check if user exists
-        let user = await auth.findOne({ $or: [{ username }, { email }] });
+        let user = await auth.findOne({ email });
         if (user) {
-            return res.status(400).json({ message: 'User already exists' });
+            // When user is already registered then login
+            // Generate JWT
+            const payload = { user: { id: user.id } };
+            const token = await jwt.sign(payload, process.env.JWT_SECRET,
+                { expiresIn: '30d' });
+            return res.status(201).json({ user, token });
         }
 
         // Create new user
-        user = new auth({ username, email });
+        user = new auth({ display_name, email, photo_url, phone_number });
         // Save user
         await user.save();
 

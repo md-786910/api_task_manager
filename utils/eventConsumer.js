@@ -6,7 +6,7 @@ module.exports.notifyUserRegister = async (data) => {
     const subject = "Registration Successful";
     const html = `
         <h1>Welcome to our platform!</h1>
-        <p>Dear ${username},</p>
+        <p>Dear ${display_name},</p>
         <p>Thank you for registering with us. Your account has been created successfully.</p>
         <p>You can now login using your username.</p>
         <p>Best regards,</p>

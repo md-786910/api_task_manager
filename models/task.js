@@ -1,8 +1,12 @@
 const mongoose = require("mongoose");
+const taskStatuses = {
+    NEW: 0,
+    COMPLETED: 1,
+}
 const taskSchema = new mongoose.Schema(
     {
         user_id: {
-            type: new mongoose.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: "auth",
             required: true,
         },
@@ -13,14 +17,16 @@ const taskSchema = new mongoose.Schema(
         },
         summary: {
             type: String,
-            required: true,
-            trim: true,
-            minlength: [10, 'summary must be at least 10 characters long'],
-            maxlength: [100, 'summary cannot be more than 100 characters long']
+            required: false,
         },
         update_task_to_empty: {
             type: Date,
             required: false,
+        },
+        status: {
+            type: Number,
+            enum: Object.values(taskStatuses),
+            default: 0
         },
         is_active: {
             type: Boolean,
@@ -29,12 +35,18 @@ const taskSchema = new mongoose.Schema(
         is_deleted: {
             type: Boolean,
             default: false,
-        }
+        },
     },
     {
         timestamps: true,
         autoIndex: false,
     }
 );
-const task = new mongoose.model("task", taskSchema);
-module.exports = task;
+
+// Defined some static method
+
+const taskModel = new mongoose.model("task", taskSchema);
+module.exports = {
+    taskStatuses,
+    taskModel
+}

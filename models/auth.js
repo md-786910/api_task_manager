@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
 const authSchema = new mongoose.Schema(
     {
-        username: { type: String, required: true, unique: true },
+        display_name: { type: String, required: true },
         email: { type: String, required: true },
-        set_time_to_notify: { type: String, required: true, default: "12 PM" },
-        schedule_time: { type: String, required: true, default: "12 PM" },
-
+        photo_url: { type: String, required: false },
+        phone_number: { type: String, required: false },
+        set_time_to_notify: { type: String, required: false, default: "12 PM" },
+        schedule_time: { type: String, required: false, default: "12 PM" },
+        generate_report_time: { type: String, required: false },
         is_active: {
             type: Boolean,
             default: false,
@@ -13,7 +15,7 @@ const authSchema = new mongoose.Schema(
         is_suspend_account: {
             type: Boolean,
             default: false,
-        }
+        },
     },
     {
         timestamps: true,

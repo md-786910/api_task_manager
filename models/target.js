@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+
+
 const targetSchema = new mongoose.Schema(
     {
         user_id: {
@@ -32,7 +34,7 @@ const targetSchema = new mongoose.Schema(
         is_deleted: {
             type: Boolean,
             default: false,
-        }
+        },
     },
     {
         timestamps: true,
